@@ -8,29 +8,6 @@ public class PolicyWriterMain {
 
     public static void main(String[] args) throws JAXBException, IOException {
 
-        List < Book > bookList = new ArrayList < Book > ();
-
-        // create books
-        Book book1 = new Book();
-        book1.setIsbn("978-0134685991");
-        book1.setName("Effective Java");
-        book1.setAuthor("Joshua Bloch");
-        book1.setPublisher("Amazon");
-        bookList.add(book1);
-
-        Book book2 = new Book();
-        book2.setIsbn("978-0596009205");
-        book2.setName("Head First Java, 2nd Edition");
-        book2.setAuthor("Kathy Sierra");
-        book2.setPublisher("amazon");
-        bookList.add(book2);
-
-        // create bookstore, assigning book
-        Bookstore bookstore = new Bookstore();
-        bookstore.setName("Amazon Bookstore");
-        bookstore.setLocation("Newyorkt");
-        bookstore.setBookList(bookList);
-
         convertObjectToXML(bookstore);
 
     }
