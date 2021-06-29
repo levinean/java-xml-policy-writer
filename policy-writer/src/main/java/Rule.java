@@ -29,30 +29,10 @@ public class Rule {
     public static Rule readResourceType(String resourceType){
         RuleEffect effect = RuleEffect.PERMIT;
         String ruleId = String.format("permit-read-resource-%s",resourceType);
-        String description = String.format("Permits read access to the following resource: ",resourceType);
+        String description = String.format("Permits read access to the following resource: %s",resourceType);
         Target target = Target.readMiddleware();
         Condition condition = new Condition(Apply.isResourceType(resourceType));
         return new Rule(effect,ruleId,description,target,condition);
-    }
-
-    public String getEffect(){
-        return this.effect;
-    }
-
-    public String getRuleId(){
-        return this.ruleId;
-    }
-
-    public String getDescription(){
-        return this.description;
-    }
-
-    public Target getTarget(){
-        return this.target;
-    }
-
-    public Condition getCondition(){
-        return this.condition;
     }
 
 }

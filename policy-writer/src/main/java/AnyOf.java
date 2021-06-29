@@ -9,15 +9,4 @@ public class AnyOf {
         this.allOfs = allOfs;
     }
 
-    public void addAllOf(AllOf allOf){
-        this.allOfs.add(allOf);
-    }
-
-    public void addAllOfs(List<AllOf> allOfs){
-        this.allOfs.addAll(allOfs);
-    }
-
-    public List<AllOf> getAllOfs() {
-        return this.allOfs;
-    }
 }

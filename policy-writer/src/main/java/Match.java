@@ -42,17 +42,4 @@ public class Match {
         return new Match(FunctionId.STRING_EQUALS,value,designator);
     }
 
-
-
-    public AttributeValue getValue(){
-        return this.value;
-    }
-
-    public AttributeDesignator getDesignator(){
-        return this.designator;
-    }
-
-    public String getFunctionId(){
-        return this.matchId;
-    }
 }

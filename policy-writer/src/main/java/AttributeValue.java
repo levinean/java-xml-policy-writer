@@ -12,8 +12,4 @@ public class AttributeValue {
         this.value = value;
         this.dataType = dataType.getUrn();
     }
-
-    public String getValue(){
-        return this.value;
-    }
 }

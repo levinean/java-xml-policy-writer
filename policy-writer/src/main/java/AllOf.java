@@ -18,16 +18,4 @@ public class AllOf {
         return new AllOf(matches);
     }
 
-    public void addMatch(Match match){
-        this.matches.add(match);
-    }
-
-    public void addMatches(List<Match> matches){
-        this.matches.addAll(matches);
-    }
-
-    public List<Match> getMatches() {
-        return this.matches;
-    }
-
 }

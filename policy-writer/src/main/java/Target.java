@@ -29,11 +29,4 @@ public class Target {
         return new Target(anyOf);
     }
 
-    public AnyOf getAnyOf(){
-        return this.anyOf;
-    }
-
-    public void setAnyOf(AnyOf anyOf){
-        this.anyOf = anyOf;
-    }
 }

@@ -10,7 +10,4 @@ public class Condition {
         this.apply = apply;
     }
 
-    public Apply getApply(){
-        return this.apply;
-    }
 }
