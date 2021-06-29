@@ -1,10 +1,10 @@
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-public class Match {
+public class Apply {
 
-    @XmlAttribute(name="MatchId")
-    private String matchId;
+    @XmlAttribute(name="FunctionId")
+    private String functionId;
 
     @XmlElement(name="AttributeValue")
     private AttributeValue value;
@@ -12,8 +12,8 @@ public class Match {
     @XmlElement(name="AttributeDesignator")
     private AttributeDesignator designator;
 
-    public Match(FunctionId functionId, AttributeValue value, AttributeDesignator designator ){
-        this.matchId = functionId.getUrn();
+    public Apply(FunctionId functionId, AttributeValue value, AttributeDesignator designator ){
+        this.functionId = functionId.getUrn();
         this.value = value;
         this.designator = designator;
     }
@@ -27,6 +27,6 @@ public class Match {
     }
 
     public String getFunctionId(){
-        return this.matchId;
+        return this.functionId;
     }
 }
