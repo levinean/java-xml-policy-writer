@@ -54,4 +54,8 @@ public class Rule {
         return new Rule(effect,ruleId,description,target,condition);
     }
 
+    public static Rule defaultDeny(){
+        return new Rule(RuleEffect.DENY,"default-deny",null,null,null);
+    }
+
 }

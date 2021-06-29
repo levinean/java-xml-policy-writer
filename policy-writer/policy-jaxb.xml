@@ -91,4 +91,5 @@
             </Apply>
         </Condition>
     </Rule>
+    <Rule Effect="Deny" RuleId="default-deny"/>
 </Policy>

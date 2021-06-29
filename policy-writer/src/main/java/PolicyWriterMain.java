@@ -28,6 +28,7 @@ public class PolicyWriterMain {
         rules.add(Rule.readMultipleResourceTypes(resourceTypes));
 
         rules.add(Rule.readOwnPersonResource());
+        rules.add(Rule.defaultDeny());
         Policy policy = new Policy(
                 policyId,
                 alg,
