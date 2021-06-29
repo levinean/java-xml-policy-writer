@@ -34,6 +34,33 @@
             </Apply>
         </Condition>
     </Rule>
+    <Rule Effect="Permit" RuleId="permit-read-resources">
+        <Description>Permits read access to the following resources: [Organization, Patient, Practitioner]</Description>
+        <Target>
+            <AnyOf>
+                <AllOf>
+                    <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">middleware</AttributeValue>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
+                    </Match>
+                    <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
+                    </Match>
+                </AllOf>
+            </AnyOf>
+        </Target>
+        <Condition>
+            <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+                <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
+                <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Organization</AttributeValue>
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Patient</AttributeValue>
+                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Practitioner</AttributeValue>
+                </Apply>
+            </Apply>
+        </Condition>
+    </Rule>
     <Rule Effect="Permit" RuleId="permit-read-user-own-person-resource">
         <Description>Permits read access to the user's own person resource</Description>
         <Target>

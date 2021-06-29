@@ -1,5 +1,6 @@
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 public class Rule {
 
@@ -32,6 +33,15 @@ public class Rule {
         String description = String.format("Permits read access to the following resource: %s",resourceType);
         Target target = Target.readMiddleware();
         Condition condition = new Condition(Apply.isResourceType(resourceType));
+        return new Rule(effect,ruleId,description,target,condition);
+    }
+
+    public static Rule readMultipleResourceTypes(List<String> resourceTypes){
+        RuleEffect effect = RuleEffect.PERMIT;
+        String ruleId = "permit-read-resources";
+        String description = String.format("Permits read access to the following resources: %s",resourceTypes.toString());
+        Target target = Target.readMiddleware();
+        Condition condition = new Condition(Apply.readResources(resourceTypes));
         return new Rule(effect,ruleId,description,target,condition);
     }
 

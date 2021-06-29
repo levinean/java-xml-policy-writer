@@ -13,26 +13,34 @@ public class Apply {
     private List<AttributeValue> values;
 
     @XmlElement(name="AttributeDesignator")
-    private AttributeDesignator designator;
+    private List<AttributeDesignator> designators;
+
+    @XmlElement(name="Function")
+    private List<FunctionArg> functions;
 
     @XmlElement(name="Apply")
-    private Apply apply;
+    private List<Apply> applies;
 
     public Apply(Optional<FunctionId> functionId,
                  Optional<List<AttributeValue>> values,
-                 Optional<AttributeDesignator> designator,
-                 Optional<Apply> apply){
+                 Optional<List<AttributeDesignator>> designators,
+                 Optional<List<Apply>> applies,
+                 Optional<List<FunctionArg>> functions){
         if(functionId.isPresent()){
             this.functionId = functionId.get().getUrn();
         }
         if(values.isPresent()){
             this.values = values.get();
         }
-        if(designator.isPresent()){
-            this.designator = designator.get();
+        if(designators.isPresent()){
+            this.designators = designators.get();
         }
-        if(apply.isPresent()){
-            this.apply = apply.get();
+        if(applies.isPresent()){
+            this.applies = applies.get();
+        }
+
+        if(functions.isPresent()){
+            this.functions = functions.get();
         }
     }
 
@@ -41,9 +49,12 @@ public class Apply {
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(value);
         AttributeDesignator designator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        List<AttributeDesignator> designators = new LinkedList<AttributeDesignator>();
+        designators.add(designator);
         return new Apply(Optional.of(FunctionId.STRING_EQUALS),
                          Optional.of(values),
-                         Optional.of(designator),
+                         Optional.of(designators),
+                         Optional.empty(),
                          Optional.empty());
     }
 
@@ -57,17 +68,55 @@ public class Apply {
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(fhirpathValue);
         AttributeDesignator resourceDesignator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
+        resourceDesignators.add(resourceDesignator);
         Apply getPersonIdentifiers = new Apply(
                 Optional.of(fhirpathFunctionId),
                 Optional.of(values),
-                Optional.of(resourceDesignator),
+                Optional.of(resourceDesignators),
+                Optional.empty(),
                 Optional.empty()
         );
 
+        List<AttributeDesignator> subjectIdDesignators = new LinkedList<AttributeDesignator>();
+        subjectIdDesignators.add(subjectIdDesignator);
+        List<Apply> applyInputs = new LinkedList<Apply>();
+        applyInputs.add(getPersonIdentifiers);
         return new Apply(Optional.of(functionId),
                 Optional.empty(),
-                Optional.of(subjectIdDesignator),
-                Optional.of(getPersonIdentifiers));
+                Optional.of(subjectIdDesignators),
+                Optional.of(applyInputs),
+                Optional.empty());
+    }
+
+    public static Apply readResources(List<String> resources){
+        FunctionId functionId = FunctionId.STRING_ONE_MEMBER_OF;
+        AttributeDesignator resourceDesignator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
+        resourceDesignators.add(resourceDesignator);
+
+        FunctionId stringBag = FunctionId.STRING_BAG;
+
+        List<AttributeValue> resourceTypeValues = new LinkedList<AttributeValue>();
+        resources.forEach((String resourceType) -> resourceTypeValues.add(new AttributeValue(DataType.STRING,resourceType)));
+        Apply buildResourceTypeBag = new Apply(
+                Optional.of(stringBag),
+                Optional.of(resourceTypeValues),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()
+        );
+
+        List<Apply> applyInputs = new LinkedList<Apply>();
+        applyInputs.add(buildResourceTypeBag);
+
+        return new Apply(
+                Optional.of(functionId),
+                Optional.empty(),
+                Optional.of(resourceDesignators),
+                Optional.of(applyInputs),
+                Optional.empty()
+        );
     }
 
 }

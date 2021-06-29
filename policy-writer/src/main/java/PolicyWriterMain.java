@@ -17,8 +17,16 @@ public class PolicyWriterMain {
         String description = "Test description";
         RuleCombiningAlgorithm alg = RuleCombiningAlgorithm.PERMIT_OVERRIDES;
         Target target = Target.isClient("admin-controls");
+
         List<Rule> rules = new LinkedList<Rule>();
         rules.add(Rule.readResourceType("Subscription"));
+
+        List<String> resourceTypes = new LinkedList<String>();
+        resourceTypes.add("Organization");
+        resourceTypes.add("Patient");
+        resourceTypes.add("Practitioner");
+        rules.add(Rule.readMultipleResourceTypes(resourceTypes));
+
         rules.add(Rule.readOwnPersonResource());
         Policy policy = new Policy(
                 policyId,
