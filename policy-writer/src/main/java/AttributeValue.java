@@ -8,8 +8,9 @@ public class AttributeValue {
     @XmlElement()
     private String value;
 
-    public AttributeValue(String value){
+    public AttributeValue(DataType dataType, String value){
         this.value = value;
+        this.dataType = dataType.getUrn();
     }
 
     public String getValue(){

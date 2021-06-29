@@ -18,6 +18,12 @@ public class Apply {
         this.designator = designator;
     }
 
+    public static Apply isResourceType(String resourceType){
+        AttributeValue value = new AttributeValue(DataType.STRING,resourceType);
+        AttributeDesignator designator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        return new Apply(FunctionId.STRING_EQUALS,value,designator);
+    }
+
     public AttributeValue getValue(){
         return this.value;
     }
