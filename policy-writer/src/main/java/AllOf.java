@@ -18,4 +18,12 @@ public class AllOf {
         return new AllOf(matches);
     }
 
+    public static AllOf readOwnPersonResource(){
+        List<Match> matches = new LinkedList<>();
+        matches.add(Match.isMiddleware());
+        matches.add(Match.isRead());
+        matches.add(Match.isResourceType("Person"));
+        return new AllOf(matches);
+    }
+
 }

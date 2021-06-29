@@ -19,6 +19,7 @@ public class PolicyWriterMain {
         Target target = Target.isClient("admin-controls");
         List<Rule> rules = new LinkedList<Rule>();
         rules.add(Rule.readResourceType("Subscription"));
+        rules.add(Rule.readOwnPersonResource());
         Policy policy = new Policy(
                 policyId,
                 alg,

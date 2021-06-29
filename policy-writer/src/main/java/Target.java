@@ -29,4 +29,11 @@ public class Target {
         return new Target(anyOf);
     }
 
+    public static Target readOwnPersonResource(){
+        List<AllOf> allOfs = new LinkedList<AllOf>();
+        allOfs.add(AllOf.readOwnPersonResource());
+        AnyOf anyOf = new AnyOf(allOfs);
+        return new Target(anyOf);
+    }
+
 }

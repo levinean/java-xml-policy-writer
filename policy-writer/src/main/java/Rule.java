@@ -35,4 +35,13 @@ public class Rule {
         return new Rule(effect,ruleId,description,target,condition);
     }
 
+    public static Rule readOwnPersonResource(){
+        RuleEffect effect = RuleEffect.PERMIT;
+        String ruleId = "permit-read-user-own-person-resource";
+        String description = "Permits read access to the user's own person resource";
+        Target target = Target.readOwnPersonResource();
+        Condition condition = new Condition(Apply.readOwnPersonResource());
+        return new Rule(effect,ruleId,description,target,condition);
+    }
+
 }
