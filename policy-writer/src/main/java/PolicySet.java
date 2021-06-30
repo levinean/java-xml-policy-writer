@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name="PolicySet")
-public class PolicySet {
+public class PolicySet implements Xacml{
     @XmlAttribute
     @Builder.Default
     @NonNull private String xmlns = "urn:oasis:names:tc:xacml:3.0:core:schema:wd-17";
@@ -30,7 +30,7 @@ public class PolicySet {
     @XmlAttribute(name="PolicySetId")
     @NonNull private String policySetId;
 
-    @XmlAttribute(name="PolicyCombiningAlgorithm")
+    @XmlAttribute(name="PolicyCombiningAlgorithmId")
     @NonNull private PolicyCombiningAlgorithm policyCombiningAlgorithm;
 
     @XmlElement(name="Description")

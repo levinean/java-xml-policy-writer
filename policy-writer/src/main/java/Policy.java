@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name="Policy")
-public class Policy {
+public class Policy implements Xacml {
     @XmlAttribute
     @Builder.Default
     private String xmlns = "urn:oasis:names:tc:xacml:3.0:core:schema:wd-17";
@@ -27,7 +27,7 @@ public class Policy {
     @XmlAttribute(name="PolicyId")
     private String policyId;
 
-    @XmlAttribute(name="RuleCombiningAlgorithm")
+    @XmlAttribute(name="RuleCombiningAlgorithmId")
     private RuleCombiningAlgorithm ruleCombiningAlgorithm;
 
     @XmlElement(name="Description")

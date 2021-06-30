@@ -10,7 +10,8 @@ import java.util.List;
 
 public class PolicyWriterMain {
 
-    private static final String EXAMPLE_XML = "policy-jaxb.xml";
+    private static final String EXAMPLE_XML_POLICY = "policy.xml";
+    private static final String EXAMPLE_XML_POLICYSET = "policy_set.xml";
 
     public static void main(String[] args) throws JAXBException, IOException {
 
@@ -27,11 +28,11 @@ public class PolicyWriterMain {
                 .target(Target.isClient("admin-controls"))
                 .rules(rules)
                 .build();
-        convertObjectToXML(policy);
+        convertObjectToXML(policy,EXAMPLE_XML_POLICY);
 
     }
 
-    private static void convertObjectToXML(Policy policy) throws JAXBException, FileNotFoundException {
+    private static void convertObjectToXML(Xacml policy,String fileName) throws JAXBException, FileNotFoundException {
         // create JAXB context and instantiate marshaller
         JAXBContext context = JAXBContext.newInstance(Policy.class);
         Marshaller m = context.createMarshaller();
@@ -41,6 +42,6 @@ public class PolicyWriterMain {
         m.marshal(policy, System.out);
 
         // Write to File
-        m.marshal(policy, new File(EXAMPLE_XML));
+        m.marshal(policy, new File(fileName));
     }
 }
