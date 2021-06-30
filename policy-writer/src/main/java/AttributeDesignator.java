@@ -16,7 +16,7 @@ public class AttributeDesignator {
     private String category;
 
     @XmlAttribute(name="DataType")
-    private String dataType;
+    private DataType dataType;
 
     @XmlAttribute(name="MustBePresent")
     private String mustBePresent = "false";
@@ -25,7 +25,7 @@ public class AttributeDesignator {
         return AttributeDesignator.builder()
                 .attributeId(AttributeId.FHIR_RESOURCE_TYPE.getUrn())
                 .category(AttributeCategory.RESOURCE.getUrn())
-                .dataType(DataType.STRING.getUrn())
+                .dataType(DataType.STRING)
                 .build();
     }
 
@@ -33,7 +33,7 @@ public class AttributeDesignator {
         return AttributeDesignator.builder()
                 .attributeId(AttributeId.SUBJECT_ID.getUrn())
                 .category(AttributeCategory.SUBJECT.getUrn())
-                .dataType(DataType.STRING.getUrn())
+                .dataType(DataType.STRING)
                 .build();
     }
 
@@ -41,7 +41,7 @@ public class AttributeDesignator {
         return AttributeDesignator.builder()
                 .attributeId(AttributeId.ACTION_NAMESPACE.getUrn())
                 .category(AttributeCategory.ACTION.getUrn())
-                .dataType(DataType.STRING.getUrn())
+                .dataType(DataType.STRING)
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class AttributeDesignator {
         return AttributeDesignator.builder()
                 .attributeId(AttributeId.ACTION_ID.getUrn())
                 .category(AttributeCategory.ACTION.getUrn())
-                .dataType(DataType.STRING.getUrn())
+                .dataType(DataType.STRING)
                 .build();
 
     }
@@ -58,7 +58,7 @@ public class AttributeDesignator {
         return AttributeDesignator.builder()
                 .attributeId(AttributeId.CLIENT_ID.getUrn())
                 .category(AttributeCategory.OAUTH_CLIENT.getUrn())
-                .dataType(DataType.STRING.getUrn())
+                .dataType(DataType.STRING)
                 .build();
 
     }

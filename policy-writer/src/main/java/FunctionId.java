@@ -1,16 +1,14 @@
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+
+@XmlEnum(String.class)
 public enum FunctionId {
-    STRING_BAG("urn:oasis:names:tc:xacml:1.0:function:string-bag"),
-    STRING_EQUALS("urn:oasis:names:tc:xacml:1.0:function:string-equal"),
-    STRING_ONE_MEMBER_OF("urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of"),
-    FHIR_PATH("commure:xacml:1.0:function:fhir-path");
-
-    private String urn;
-
-    FunctionId(String urn){
-        this.urn = urn;
-    }
-
-    public String getUrn(){
-        return this.urn;
-    }
+    @XmlEnumValue("urn:oasis:names:tc:xacml:1.0:function:string-bag")
+    STRING_BAG,
+    @XmlEnumValue("urn:oasis:names:tc:xacml:1.0:function:string-equal")
+    STRING_EQUALS,
+    @XmlEnumValue("urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of")
+    STRING_ONE_MEMBER_OF,
+    @XmlEnumValue("commure:xacml:1.0:function:fhir-path")
+    FHIR_PATH
 }

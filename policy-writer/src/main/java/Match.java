@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 public class Match {
 
     @XmlAttribute(name="MatchId")
-    private String matchId;
+    private FunctionId matchId;
 
     @XmlElement(name="AttributeValue")
     private AttributeValue value;
@@ -45,7 +45,7 @@ public class Match {
 
     public static Match stringEquals(AttributeValue value,AttributeDesignator designator){
         return Match.builder()
-                .matchId(FunctionId.STRING_EQUALS.getUrn())
+                .matchId(FunctionId.STRING_EQUALS)
                 .value(value)
                 .designator(designator)
                 .build();

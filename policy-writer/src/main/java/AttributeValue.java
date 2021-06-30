@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlValue;
 @Builder
 public class AttributeValue {
     @XmlAttribute(name="DataType")
-    private String dataType;
+    private DataType dataType;
 
     @XmlValue
     private String value;
 
     public static AttributeValue string(String value){
-        return AttributeValue.builder().dataType(DataType.STRING.getUrn()).value(value).build();
+        return AttributeValue.builder().dataType(DataType.STRING).value(value).build();
     }
 
     public static AttributeValue fhirpath(String value){
-        return AttributeValue.builder().dataType(DataType.FHIR_PATH.getUrn()).value(value).build();
+        return AttributeValue.builder().dataType(DataType.FHIR_PATH).value(value).build();
     }
 }

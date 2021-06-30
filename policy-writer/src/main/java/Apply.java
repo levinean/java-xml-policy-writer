@@ -13,7 +13,7 @@ import java.util.List;
 public class Apply {
 
     @XmlAttribute(name="FunctionId")
-    @NonNull private String functionId;
+    @NonNull private FunctionId functionId;
 
     @XmlElement(name="AttributeValue")
     private List<AttributeValue> values;
@@ -32,7 +32,7 @@ public class Apply {
         AttributeValue value = AttributeValue.string(resourceType);
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
         return Apply.builder()
-                    .functionId(FunctionId.STRING_EQUALS.getUrn())
+                    .functionId(FunctionId.STRING_EQUALS)
                     .values(Arrays.asList(new AttributeValue[] {value}))
                     .designators(Arrays.asList(new AttributeDesignator[] {designator}))
                     .build();
@@ -51,7 +51,7 @@ public class Apply {
         List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
         resourceDesignators.add(resourceDesignator);
         Apply getPersonIdentifiers = Apply.builder()
-                .functionId(fhirpathFunctionId.getUrn())
+                .functionId(fhirpathFunctionId)
                 .values(values)
                 .designators(resourceDesignators)
                 .build();
@@ -61,7 +61,7 @@ public class Apply {
         List<Apply> applyInputs = new LinkedList<Apply>();
         applyInputs.add(getPersonIdentifiers);
         return Apply.builder()
-                .functionId(functionId.getUrn())
+                .functionId(functionId)
                 .designators(subjectIdDesignators)
                 .applies(applyInputs)
                 .build();
@@ -78,7 +78,7 @@ public class Apply {
         List<AttributeValue> resourceTypeValues = new LinkedList<AttributeValue>();
         resources.forEach((String resourceType) -> resourceTypeValues.add(AttributeValue.string(resourceType)));
         Apply buildResourceTypeBag = Apply.builder()
-                .functionId(stringBagFunctionId.getUrn())
+                .functionId(stringBagFunctionId)
                 .values(resourceTypeValues)
                 .build();
 
@@ -86,7 +86,7 @@ public class Apply {
         applyInputs.add(buildResourceTypeBag);
 
         return Apply.builder()
-                .functionId(functionId.getUrn())
+                .functionId(functionId)
                 .designators(resourceDesignators)
                 .applies(applyInputs)
                 .build();
