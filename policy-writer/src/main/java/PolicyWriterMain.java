@@ -29,13 +29,14 @@ public class PolicyWriterMain {
 
         rules.add(Rule.readOwnPersonResource());
         rules.add(Rule.defaultDeny());
-        Policy policy = new Policy(
-                policyId,
-                alg,
-                description,
-                target,
-                rules
-        );
+
+        Policy policy = Policy.builder()
+                .policyId(policyId)
+                .ruleCombiningAlgorithm(alg.getUrn())
+                .description(description)
+                .target(target)
+                .rules(rules)
+                .build();
         convertObjectToXML(policy);
 
     }

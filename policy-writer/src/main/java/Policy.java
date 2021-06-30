@@ -1,8 +1,11 @@
+import lombok.Builder;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@Builder
 @XmlRootElement(name="Policy")
 public class Policy {
     @XmlAttribute
