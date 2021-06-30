@@ -10,45 +10,46 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class AttributeDesignator {
 
     @XmlAttribute(name="AttributeId")
-    private String attributeId;
+    private AttributeId attributeId;
 
     @XmlAttribute(name="Category")
-    private String category;
+    private AttributeCategory category;
 
     @XmlAttribute(name="DataType")
     private DataType dataType;
 
     @XmlAttribute(name="MustBePresent")
+    @Builder.Default
     private String mustBePresent = "false";
 
     public static AttributeDesignator requestedResourceType(){
         return AttributeDesignator.builder()
-                .attributeId(AttributeId.FHIR_RESOURCE_TYPE.getUrn())
-                .category(AttributeCategory.RESOURCE.getUrn())
+                .attributeId(AttributeId.FHIR_RESOURCE_TYPE)
+                .category(AttributeCategory.RESOURCE)
                 .dataType(DataType.STRING)
                 .build();
     }
 
     public static AttributeDesignator currentSubjectId(){
         return AttributeDesignator.builder()
-                .attributeId(AttributeId.SUBJECT_ID.getUrn())
-                .category(AttributeCategory.SUBJECT.getUrn())
+                .attributeId(AttributeId.SUBJECT_ID)
+                .category(AttributeCategory.SUBJECT)
                 .dataType(DataType.STRING)
                 .build();
     }
 
     public static AttributeDesignator currentActionNamespace(){
         return AttributeDesignator.builder()
-                .attributeId(AttributeId.ACTION_NAMESPACE.getUrn())
-                .category(AttributeCategory.ACTION.getUrn())
+                .attributeId(AttributeId.ACTION_NAMESPACE)
+                .category(AttributeCategory.ACTION)
                 .dataType(DataType.STRING)
                 .build();
     }
 
     public static AttributeDesignator requestedActionType(){
         return AttributeDesignator.builder()
-                .attributeId(AttributeId.ACTION_ID.getUrn())
-                .category(AttributeCategory.ACTION.getUrn())
+                .attributeId(AttributeId.ACTION_ID)
+                .category(AttributeCategory.ACTION)
                 .dataType(DataType.STRING)
                 .build();
 
@@ -56,8 +57,8 @@ public class AttributeDesignator {
 
     public static AttributeDesignator currentClientId(){
         return AttributeDesignator.builder()
-                .attributeId(AttributeId.CLIENT_ID.getUrn())
-                .category(AttributeCategory.OAUTH_CLIENT.getUrn())
+                .attributeId(AttributeId.CLIENT_ID)
+                .category(AttributeCategory.OAUTH_CLIENT)
                 .dataType(DataType.STRING)
                 .build();
 

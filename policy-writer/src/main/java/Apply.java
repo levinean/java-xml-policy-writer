@@ -33,8 +33,8 @@ public class Apply {
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
         return Apply.builder()
                     .functionId(FunctionId.STRING_EQUALS)
-                    .values(Arrays.asList(new AttributeValue[] {value}))
-                    .designators(Arrays.asList(new AttributeDesignator[] {designator}))
+                    .values(Arrays.asList(value))
+                    .designators(Arrays.asList(designator))
                     .build();
     }
 

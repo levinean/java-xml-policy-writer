@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Policy PolicyId="Test-policy-id" RuleCombiningAlgorithm="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:permit-overrides">
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.0" PolicyId="Test-policy-id" RuleCombiningAlgorithm="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:permit-overrides">
     <Description>Test description</Description>
     <Target>
         <AnyOf>
             <AllOf>
                 <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">admin-controls</AttributeValue>
-                    <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:client:client-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:oauth-client" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                    <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:client:client-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:oauth-client" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                 </Match>
             </AllOf>
         </AnyOf>
@@ -18,11 +18,11 @@
                 <AllOf>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">middleware</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                 </AllOf>
             </AnyOf>
@@ -30,7 +30,7 @@
         <Condition>
             <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                 <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Subscription</AttributeValue>
-                <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
             </Apply>
         </Condition>
     </Rule>
@@ -41,18 +41,18 @@
                 <AllOf>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">middleware</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                 </AllOf>
             </AnyOf>
         </Target>
         <Condition>
             <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
-                <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                 <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Organization</AttributeValue>
                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Patient</AttributeValue>
@@ -68,25 +68,25 @@
                 <AllOf>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">middleware</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-namespace" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">read</AttributeValue>
-                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                     <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
                         <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">Person</AttributeValue>
-                        <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                        <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                     </Match>
                 </AllOf>
             </AnyOf>
         </Target>
         <Condition>
             <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
-                <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                 <Apply FunctionId="commure:xacml:1.0:function:fhir-path">
                     <AttributeValue DataType="commure:xacml:1.0:data-type:fhir-path">identifier.value</AttributeValue>
-                    <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+                    <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"/>
                 </Apply>
             </Apply>
         </Condition>
