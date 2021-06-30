@@ -14,22 +14,17 @@ public class PolicyWriterMain {
 
     public static void main(String[] args) throws JAXBException, IOException {
 
-        String policyId = "Test-policy-id";
-        String description = "Test description";
-        RuleCombiningAlgorithm alg = RuleCombiningAlgorithm.PERMIT_OVERRIDES;
-        Target target = Target.isClient("admin-controls");
-
         List<Rule> rules = new LinkedList<Rule>();
         rules.add(Rule.readResourceType("Subscription"));
-        rules.add(Rule.readMultipleResourceTypes(Arrays.asList(new String[]{"Organization","Patient","Practitioner"})));
+        rules.add(Rule.readMultipleResourceTypes(Arrays.asList("Organization","Patient","Practitioner")));
         rules.add(Rule.readOwnPersonResource());
         rules.add(Rule.defaultDeny());
 
         Policy policy = Policy.builder()
-                .policyId(policyId)
-                .ruleCombiningAlgorithm(alg.getUrn())
-                .description(description)
-                .target(target)
+                .policyId("Test-policy-id")
+                .ruleCombiningAlgorithm(RuleCombiningAlgorithm.PERMIT_OVERRIDES)
+                .description("Test description")
+                .target(Target.isClient("admin-controls"))
                 .rules(rules)
                 .build();
         convertObjectToXML(policy);

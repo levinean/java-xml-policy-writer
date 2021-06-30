@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Policy PolicyId="Test-policy-id" RuleCombiningAlgorithm="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:permit-overrides">
+<Policy PolicyId="Test-policy-id" RuleCombiningAlgorithm="PERMIT_OVERRIDES">
     <Description>Test description</Description>
     <Target>
         <AnyOf>

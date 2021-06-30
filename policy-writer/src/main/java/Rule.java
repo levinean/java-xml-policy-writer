@@ -11,7 +11,7 @@ import java.util.List;
 public class Rule {
 
     @XmlAttribute(name="Effect")
-    @NonNull private String effect;
+    @NonNull private RuleEffect effect;
 
     @XmlAttribute(name="RuleId")
     @NonNull private String ruleId;
@@ -33,7 +33,7 @@ public class Rule {
         Target target = Target.readMiddleware();
         Condition condition = Condition.builder().apply(Apply.isResourceType(resourceType)).build();
         return Rule.builder()
-                .effect(effect.getValue())
+                .effect(effect)
                 .ruleId(ruleId)
                 .description(description)
                 .target(target)
@@ -48,7 +48,7 @@ public class Rule {
         Target target = Target.readMiddleware();
         Condition condition = new Condition(Apply.readResources(resourceTypes));
         return Rule.builder()
-                .effect(effect.getValue())
+                .effect(effect)
                 .ruleId(ruleId)
                 .description(description)
                 .target(target)
@@ -63,7 +63,7 @@ public class Rule {
         Target target = Target.readOwnPersonResource();
         Condition condition = new Condition(Apply.readOwnPersonResource());
         return Rule.builder()
-                .effect(effect.getValue())
+                .effect(effect)
                 .ruleId(ruleId)
                 .description(description)
                 .target(target)
@@ -73,7 +73,7 @@ public class Rule {
 
     public static Rule defaultDeny(){
         return Rule.builder()
-                .effect(RuleEffect.DENY.getValue())
+                .effect(RuleEffect.DENY)
                 .ruleId("default-deny")
                 .build();
     }

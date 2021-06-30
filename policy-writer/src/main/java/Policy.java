@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Policy {
     private String policyId;
 
     @XmlAttribute(name="RuleCombiningAlgorithm")
-    private String ruleCombiningAlgorithm;
+    private RuleCombiningAlgorithm ruleCombiningAlgorithm;
 
     @XmlElement(name="Description")
     private String description;
@@ -35,5 +36,10 @@ public class Policy {
 
     @XmlElement(name="Rule")
     private List<Rule> rules;
+
+//    @XmlAttribute(name="RuleCombiningAlgorithm")
+//    private String getRuleCombiningAlgorithm(){
+//        return this.ruleCombiningAlgorithm.getUrn();
+//    }
 }
 

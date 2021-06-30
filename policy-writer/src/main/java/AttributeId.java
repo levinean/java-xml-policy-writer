@@ -9,7 +9,7 @@ public enum AttributeId {
 
     private String urn;
 
-    private AttributeId(String urn){
+    AttributeId(String urn){
         this.urn = urn;
     }
 
