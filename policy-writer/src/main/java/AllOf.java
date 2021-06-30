@@ -3,6 +3,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,17 +15,17 @@ public class AllOf {
     private List<Match> matches = new LinkedList<>();
 
     public static AllOf readMiddleware(){
-        List<Match> matches = new LinkedList<>();
-        matches.add(Match.isMiddleware());
-        matches.add(Match.isRead());
+        List<Match> matches = Arrays.asList(
+                Match.isMiddleware(),
+                Match.isRead());
         return AllOf.builder().matches(matches).build();
     }
 
     public static AllOf readOwnPersonResource(){
-        List<Match> matches = new LinkedList<>();
-        matches.add(Match.isMiddleware());
-        matches.add(Match.isRead());
-        matches.add(Match.isResourceType("Person"));
+        List<Match> matches = Arrays.asList(
+                Match.isMiddleware(),
+                Match.isRead(),
+                Match.isResourceType("Person"));
         return AllOf.builder().matches(matches).build();
     }
 

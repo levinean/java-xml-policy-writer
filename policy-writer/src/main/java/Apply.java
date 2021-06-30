@@ -2,9 +2,9 @@ import lombok.*;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,60 +33,45 @@ public class Apply {
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
         return Apply.builder()
                     .functionId(FunctionId.STRING_EQUALS)
-                    .values(Arrays.asList(value))
-                    .designators(Arrays.asList(designator))
+                    .values(Collections.singletonList(value))
+                    .designators(Collections.singletonList(designator))
                     .build();
     }
 
     public static Apply readOwnPersonResource(){
-        FunctionId functionId = FunctionId.STRING_ONE_MEMBER_OF;
-        AttributeDesignator subjectIdDesignator = AttributeDesignator.currentSubjectId();
 
-        FunctionId fhirpathFunctionId = FunctionId.FHIR_PATH;
-        String fhirpath = "identifier.value";
-        AttributeValue fhirpathValue = AttributeValue.fhirpath(fhirpath);
-        List<AttributeValue> values = new LinkedList<AttributeValue>();
-        values.add(fhirpathValue);
-        AttributeDesignator resourceDesignator = AttributeDesignator.requestedResourceType();
-        List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
-        resourceDesignators.add(resourceDesignator);
+        List<AttributeValue> values = Collections.singletonList(AttributeValue.fhirpath("identifier.value"));
+        List<AttributeDesignator> resourceDesignators = Collections.singletonList(AttributeDesignator.requestedResourceType());
         Apply getPersonIdentifiers = Apply.builder()
-                .functionId(fhirpathFunctionId)
+                .functionId(FunctionId.FHIR_PATH)
                 .values(values)
                 .designators(resourceDesignators)
                 .build();
 
-        List<AttributeDesignator> subjectIdDesignators = new LinkedList<AttributeDesignator>();
-        subjectIdDesignators.add(subjectIdDesignator);
-        List<Apply> applyInputs = new LinkedList<Apply>();
-        applyInputs.add(getPersonIdentifiers);
+        List<AttributeDesignator> subjectIdDesignators = Collections.singletonList(AttributeDesignator.currentSubjectId());
+        List<Apply> applyInputs = Collections.singletonList(getPersonIdentifiers);
         return Apply.builder()
-                .functionId(functionId)
+                .functionId(FunctionId.STRING_ONE_MEMBER_OF)
                 .designators(subjectIdDesignators)
                 .applies(applyInputs)
                 .build();
     }
 
     public static Apply readResources(List<String> resources){
-        FunctionId functionId = FunctionId.STRING_ONE_MEMBER_OF;
-        AttributeDesignator resourceDesignator = AttributeDesignator.requestedResourceType();
-        List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
-        resourceDesignators.add(resourceDesignator);
 
-        FunctionId stringBagFunctionId = FunctionId.STRING_BAG;
-
-        List<AttributeValue> resourceTypeValues = new LinkedList<AttributeValue>();
-        resources.forEach((String resourceType) -> resourceTypeValues.add(AttributeValue.string(resourceType)));
+        List<AttributeValue> resourceTypeValues = resources.stream()
+                .map(type -> AttributeValue.string(type))
+                .collect(Collectors.toList());
         Apply buildResourceTypeBag = Apply.builder()
-                .functionId(stringBagFunctionId)
+                .functionId(FunctionId.STRING_BAG)
                 .values(resourceTypeValues)
                 .build();
 
-        List<Apply> applyInputs = new LinkedList<Apply>();
-        applyInputs.add(buildResourceTypeBag);
+        List<Apply> applyInputs = Collections.singletonList(buildResourceTypeBag);
+        List<AttributeDesignator> resourceDesignators = Collections.singletonList(AttributeDesignator.requestedResourceType());
 
         return Apply.builder()
-                .functionId(functionId)
+                .functionId(FunctionId.STRING_ONE_MEMBER_OF)
                 .designators(resourceDesignators)
                 .applies(applyInputs)
                 .build();
