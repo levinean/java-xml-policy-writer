@@ -2,6 +2,7 @@ import lombok.*;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,15 +30,11 @@ public class Apply {
 
     public static Apply isResourceType(String resourceType){
         AttributeValue value = AttributeValue.string(resourceType);
-        List<AttributeValue> values = new LinkedList<AttributeValue>();
-        values.add(value);
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
-        List<AttributeDesignator> designators = new LinkedList<AttributeDesignator>();
-        designators.add(designator);
         return Apply.builder()
                     .functionId(FunctionId.STRING_EQUALS.getUrn())
-                    .values(values)
-                    .designators(designators)
+                    .values(Arrays.asList(new AttributeValue[] {value}))
+                    .designators(Arrays.asList(new AttributeDesignator[] {designator}))
                     .build();
     }
 

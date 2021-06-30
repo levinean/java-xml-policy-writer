@@ -4,6 +4,7 @@ import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,13 +21,7 @@ public class PolicyWriterMain {
 
         List<Rule> rules = new LinkedList<Rule>();
         rules.add(Rule.readResourceType("Subscription"));
-
-        List<String> resourceTypes = new LinkedList<String>();
-        resourceTypes.add("Organization");
-        resourceTypes.add("Patient");
-        resourceTypes.add("Practitioner");
-        rules.add(Rule.readMultipleResourceTypes(resourceTypes));
-
+        rules.add(Rule.readMultipleResourceTypes(Arrays.asList(new String[]{"Organization","Patient","Practitioner"})));
         rules.add(Rule.readOwnPersonResource());
         rules.add(Rule.defaultDeny());
 
