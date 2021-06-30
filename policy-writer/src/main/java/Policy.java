@@ -1,10 +1,14 @@
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @XmlRootElement(name="Policy")
 public class Policy {
@@ -31,15 +35,5 @@ public class Policy {
 
     @XmlElement(name="Rule")
     private List<Rule> rules;
-
-    public Policy(){};
-
-    public Policy(String policyId, RuleCombiningAlgorithm ruleCombiningAlgorithm, String description,Target target,List<Rule> rules){
-        this.policyId = policyId;
-        this.ruleCombiningAlgorithm = ruleCombiningAlgorithm.getUrn();
-        this.description = description;
-        this.target = target;
-        this.rules = rules;
-    }
 }
 
