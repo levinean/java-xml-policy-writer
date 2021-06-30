@@ -27,34 +27,12 @@ public class Apply {
     @XmlElement(name="Apply")
     private List<Apply> applies;
 
-//    public Apply(Optional<FunctionId> functionId,
-//                 Optional<List<AttributeValue>> values,
-//                 Optional<List<AttributeDesignator>> designators,
-//                 Optional<List<Apply>> applies,
-//                 Optional<List<FunctionArg>> functions){
-//        if(functionId.isPresent()){
-//            this.functionId = functionId.get().getUrn();
-//        }
-//        if(values.isPresent()){
-//            this.values = values.get();
-//        }
-//        if(designators.isPresent()){
-//            this.designators = designators.get();
-//        }
-//        if(applies.isPresent()){
-//            this.applies = applies.get();
-//        }
-//
-//        if(functions.isPresent()){
-//            this.functions = functions.get();
-//        }
-//    }
 
     public static Apply isResourceType(String resourceType){
         AttributeValue value = new AttributeValue(DataType.STRING,resourceType);
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(value);
-        AttributeDesignator designator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        AttributeDesignator designator = AttributeDesignator.requestedResourceType();
         List<AttributeDesignator> designators = new LinkedList<AttributeDesignator>();
         designators.add(designator);
         return Apply.builder()
@@ -66,14 +44,14 @@ public class Apply {
 
     public static Apply readOwnPersonResource(){
         FunctionId functionId = FunctionId.STRING_ONE_MEMBER_OF;
-        AttributeDesignator subjectIdDesignator = new AttributeDesignator(AttributeId.SUBJECT_ID,AttributeCategory.SUBJECT,DataType.STRING);
+        AttributeDesignator subjectIdDesignator = AttributeDesignator.currentSubjectId();
 
         FunctionId fhirpathFunctionId = FunctionId.FHIR_PATH;
         String fhirpath = "identifier.value";
         AttributeValue fhirpathValue = new AttributeValue(DataType.STRING,fhirpath);
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(fhirpathValue);
-        AttributeDesignator resourceDesignator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        AttributeDesignator resourceDesignator = AttributeDesignator.requestedResourceType();
         List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
         resourceDesignators.add(resourceDesignator);
         Apply getPersonIdentifiers = Apply.builder()
@@ -95,7 +73,7 @@ public class Apply {
 
     public static Apply readResources(List<String> resources){
         FunctionId functionId = FunctionId.STRING_ONE_MEMBER_OF;
-        AttributeDesignator resourceDesignator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        AttributeDesignator resourceDesignator = AttributeDesignator.requestedResourceType();
         List<AttributeDesignator> resourceDesignators = new LinkedList<AttributeDesignator>();
         resourceDesignators.add(resourceDesignator);
 

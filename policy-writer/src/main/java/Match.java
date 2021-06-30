@@ -20,25 +20,25 @@ public class Match {
 
     public static Match isMiddleware(){
         AttributeValue value = new AttributeValue(DataType.STRING,"middleware");
-        AttributeDesignator designator = new AttributeDesignator(AttributeId.ACTION_NAMESPACE,AttributeCategory.ACTION,DataType.STRING);
+        AttributeDesignator designator = AttributeDesignator.currentActionNamespace();
         return new Match(FunctionId.STRING_EQUALS,value,designator);
     }
 
     public static Match isRead(){
         AttributeValue value = new AttributeValue(DataType.STRING,"read");
-        AttributeDesignator designator = new AttributeDesignator(AttributeId.ACTION_ID,AttributeCategory.ACTION,DataType.STRING);
+        AttributeDesignator designator = AttributeDesignator.requestedActionType();
         return new Match(FunctionId.STRING_EQUALS,value,designator);
     }
 
     public static Match isResourceType(String resourceType){
         AttributeValue value = new AttributeValue(DataType.STRING,resourceType);
-        AttributeDesignator designator = new AttributeDesignator(AttributeId.FHIR_RESOURCE_TYPE,AttributeCategory.RESOURCE,DataType.STRING);
+        AttributeDesignator designator = AttributeDesignator.requestedResourceType();
         return new Match(FunctionId.STRING_EQUALS,value,designator);
     }
 
     public static Match isClient(String clientId){
         AttributeValue value = new AttributeValue(DataType.STRING,clientId);
-        AttributeDesignator designator = new AttributeDesignator(AttributeId.CLIENT_ID,AttributeCategory.OAUTH_CLIENT,DataType.STRING);
+        AttributeDesignator designator = AttributeDesignator.currentClientId();
         return new Match(FunctionId.STRING_EQUALS,value,designator);
     }
 

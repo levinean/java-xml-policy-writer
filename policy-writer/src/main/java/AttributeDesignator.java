@@ -1,6 +1,12 @@
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.crypto.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AttributeDesignator {
 
     @XmlAttribute(name="AttributeId")
@@ -15,21 +21,46 @@ public class AttributeDesignator {
     @XmlAttribute(name="MustBePresent")
     private String mustBePresent = "false";
 
-    public AttributeDesignator(AttributeId id, AttributeCategory category, DataType dataType){
-        this.attributeId = id.getUrn();
-        this.category = category.getUrn();
-        this.dataType = dataType.getUrn();
+    public static AttributeDesignator requestedResourceType(){
+        return AttributeDesignator.builder()
+                .attributeId(AttributeId.FHIR_RESOURCE_TYPE.getUrn())
+                .category(AttributeCategory.RESOURCE.getUrn())
+                .dataType(DataType.STRING.getUrn())
+                .build();
     }
 
-    public String getAttributeId(){
-        return this.attributeId;
+    public static AttributeDesignator currentSubjectId(){
+        return AttributeDesignator.builder()
+                .attributeId(AttributeId.SUBJECT_ID.getUrn())
+                .category(AttributeCategory.SUBJECT.getUrn())
+                .dataType(DataType.STRING.getUrn())
+                .build();
     }
 
-    public String getCategory(){
-        return this.category;
+    public static AttributeDesignator currentActionNamespace(){
+        return AttributeDesignator.builder()
+                .attributeId(AttributeId.ACTION_NAMESPACE.getUrn())
+                .category(AttributeCategory.ACTION.getUrn())
+                .dataType(DataType.STRING.getUrn())
+                .build();
     }
 
-    public String getDataType(){
-        return this.dataType;
+    public static AttributeDesignator requestedActionType(){
+        return AttributeDesignator.builder()
+                .attributeId(AttributeId.ACTION_ID.getUrn())
+                .category(AttributeCategory.ACTION.getUrn())
+                .dataType(DataType.STRING.getUrn())
+                .build();
+
     }
+
+    public static AttributeDesignator currentClientId(){
+        return AttributeDesignator.builder()
+                .attributeId(AttributeId.CLIENT_ID.getUrn())
+                .category(AttributeCategory.OAUTH_CLIENT.getUrn())
+                .dataType(DataType.STRING.getUrn())
+                .build();
+
+    }
+
 }

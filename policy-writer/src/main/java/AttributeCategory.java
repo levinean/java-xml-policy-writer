@@ -6,7 +6,7 @@ public enum AttributeCategory {
 
     private String urn;
 
-    private AttributeCategory(String urn){
+    AttributeCategory(String urn){
         this.urn = urn;
     }
 
