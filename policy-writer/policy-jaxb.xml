@@ -85,7 +85,7 @@
             <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
                 <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" DataType="http://www.w3.org/2001/XMLSchema#string"/>
                 <Apply FunctionId="commure:xacml:1.0:function:fhir-path">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">identifier.value</AttributeValue>
+                    <AttributeValue DataType="commure:xacml:1.0:data-type:fhir-path">identifier.value</AttributeValue>
                     <AttributeDesignator AttributeId="commure:xacml:1.0:attribute:fhir-resource-type" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#string"/>
                 </Apply>
             </Apply>

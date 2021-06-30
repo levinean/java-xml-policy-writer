@@ -4,7 +4,7 @@ public enum RuleEffect {
 
     private String value;
 
-    private RuleEffect(String value){
+    RuleEffect(String value){
         this.value = value;
     }
 

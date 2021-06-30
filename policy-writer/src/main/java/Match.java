@@ -1,6 +1,13 @@
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Match {
 
     @XmlAttribute(name="MatchId")
@@ -12,34 +19,36 @@ public class Match {
     @XmlElement(name="AttributeDesignator")
     private AttributeDesignator designator;
 
-    public Match(FunctionId functionId, AttributeValue value, AttributeDesignator designator ){
-        this.matchId = functionId.getUrn();
-        this.value = value;
-        this.designator = designator;
-    }
-
     public static Match isMiddleware(){
-        AttributeValue value = new AttributeValue(DataType.STRING,"middleware");
+        AttributeValue value = AttributeValue.string("middleware");
         AttributeDesignator designator = AttributeDesignator.currentActionNamespace();
-        return new Match(FunctionId.STRING_EQUALS,value,designator);
+        return Match.stringEquals(value,designator);
     }
 
     public static Match isRead(){
-        AttributeValue value = new AttributeValue(DataType.STRING,"read");
+        AttributeValue value = AttributeValue.string("read");
         AttributeDesignator designator = AttributeDesignator.requestedActionType();
-        return new Match(FunctionId.STRING_EQUALS,value,designator);
+        return Match.stringEquals(value,designator);
     }
 
     public static Match isResourceType(String resourceType){
-        AttributeValue value = new AttributeValue(DataType.STRING,resourceType);
+        AttributeValue value = AttributeValue.string(resourceType);
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
-        return new Match(FunctionId.STRING_EQUALS,value,designator);
+        return Match.stringEquals(value,designator);
     }
 
     public static Match isClient(String clientId){
-        AttributeValue value = new AttributeValue(DataType.STRING,clientId);
+        AttributeValue value = AttributeValue.string(clientId);
         AttributeDesignator designator = AttributeDesignator.currentClientId();
-        return new Match(FunctionId.STRING_EQUALS,value,designator);
+        return Match.stringEquals(value,designator);
+    }
+
+    public static Match stringEquals(AttributeValue value,AttributeDesignator designator){
+        return Match.builder()
+                .matchId(FunctionId.STRING_EQUALS.getUrn())
+                .value(value)
+                .designator(designator)
+                .build();
     }
 
 }

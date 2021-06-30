@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +28,7 @@ public class Apply {
 
 
     public static Apply isResourceType(String resourceType){
-        AttributeValue value = new AttributeValue(DataType.STRING,resourceType);
+        AttributeValue value = AttributeValue.string(resourceType);
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(value);
         AttributeDesignator designator = AttributeDesignator.requestedResourceType();
@@ -48,7 +47,7 @@ public class Apply {
 
         FunctionId fhirpathFunctionId = FunctionId.FHIR_PATH;
         String fhirpath = "identifier.value";
-        AttributeValue fhirpathValue = new AttributeValue(DataType.STRING,fhirpath);
+        AttributeValue fhirpathValue = AttributeValue.fhirpath(fhirpath);
         List<AttributeValue> values = new LinkedList<AttributeValue>();
         values.add(fhirpathValue);
         AttributeDesignator resourceDesignator = AttributeDesignator.requestedResourceType();
@@ -80,7 +79,7 @@ public class Apply {
         FunctionId stringBagFunctionId = FunctionId.STRING_BAG;
 
         List<AttributeValue> resourceTypeValues = new LinkedList<AttributeValue>();
-        resources.forEach((String resourceType) -> resourceTypeValues.add(new AttributeValue(DataType.STRING,resourceType)));
+        resources.forEach((String resourceType) -> resourceTypeValues.add(AttributeValue.string(resourceType)));
         Apply buildResourceTypeBag = Apply.builder()
                 .functionId(stringBagFunctionId.getUrn())
                 .values(resourceTypeValues)

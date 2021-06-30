@@ -1,14 +1,20 @@
+import lombok.*;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Rule {
 
     @XmlAttribute(name="Effect")
-    private String effect;
+    @NonNull private String effect;
 
     @XmlAttribute(name="RuleId")
-    private String ruleId;
+    @NonNull private String ruleId;
 
     @XmlElement(name="Description")
     private String description;
@@ -19,21 +25,20 @@ public class Rule {
     @XmlElement(name="Condition")
     private Condition condition;
 
-    public Rule(RuleEffect effect,String ruleId,String description,Target target,Condition condition){
-        this.effect = effect.getValue();
-        this.ruleId=ruleId;
-        this.description = description;
-        this.target=target;
-        this.condition=condition;
-    }
 
     public static Rule readResourceType(String resourceType){
         RuleEffect effect = RuleEffect.PERMIT;
         String ruleId = String.format("permit-read-resource-%s",resourceType);
         String description = String.format("Permits read access to the following resource: %s",resourceType);
         Target target = Target.readMiddleware();
-        Condition condition = new Condition(Apply.isResourceType(resourceType));
-        return new Rule(effect,ruleId,description,target,condition);
+        Condition condition = Condition.builder().apply(Apply.isResourceType(resourceType)).build();
+        return Rule.builder()
+                .effect(effect.getValue())
+                .ruleId(ruleId)
+                .description(description)
+                .target(target)
+                .condition(condition)
+                .build();
     }
 
     public static Rule readMultipleResourceTypes(List<String> resourceTypes){
@@ -42,7 +47,13 @@ public class Rule {
         String description = String.format("Permits read access to the following resources: %s",resourceTypes.toString());
         Target target = Target.readMiddleware();
         Condition condition = new Condition(Apply.readResources(resourceTypes));
-        return new Rule(effect,ruleId,description,target,condition);
+        return Rule.builder()
+                .effect(effect.getValue())
+                .ruleId(ruleId)
+                .description(description)
+                .target(target)
+                .condition(condition)
+                .build();
     }
 
     public static Rule readOwnPersonResource(){
@@ -51,11 +62,20 @@ public class Rule {
         String description = "Permits read access to the user's own person resource";
         Target target = Target.readOwnPersonResource();
         Condition condition = new Condition(Apply.readOwnPersonResource());
-        return new Rule(effect,ruleId,description,target,condition);
+        return Rule.builder()
+                .effect(effect.getValue())
+                .ruleId(ruleId)
+                .description(description)
+                .target(target)
+                .condition(condition)
+                .build();
     }
 
     public static Rule defaultDeny(){
-        return new Rule(RuleEffect.DENY,"default-deny",null,null,null);
+        return Rule.builder()
+                .effect(RuleEffect.DENY.getValue())
+                .ruleId("default-deny")
+                .build();
     }
 
 }

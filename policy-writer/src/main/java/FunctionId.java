@@ -6,7 +6,7 @@ public enum FunctionId {
 
     private String urn;
 
-    private FunctionId(String urn){
+    FunctionId(String urn){
         this.urn = urn;
     }
 

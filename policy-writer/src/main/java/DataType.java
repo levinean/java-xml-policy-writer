@@ -4,7 +4,7 @@ public enum DataType {
 
     private String urn;
 
-    private DataType(String urn){
+    DataType(String urn){
         this.urn = urn;
     }
 
